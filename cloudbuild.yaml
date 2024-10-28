@@ -25,7 +25,11 @@ steps:
   - |
      sed -i -e "s/SHORT_SHA/${SHORT_SHA}/g" ./postgres-deployment.yaml;
 - name: 'gcr.io/cloud-builders/kubectl'
-  args: ['apply', '-f', './']
+  entrypoint: 'sh'
+  args:
+    - '-c'
+    - |
+      find . -name '*.yaml' ! -name 'cloudbuild.yaml' -exec kubectl apply -f {} \;
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=${_GKE_CLUSTER_ZONE}'
   - 'CLOUDSDK_CONTAINER_CLUSTER=${_GKE_CLUSTER_NAME}'
