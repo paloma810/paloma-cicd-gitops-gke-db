@@ -42,7 +42,5 @@ spec:
               memory: 150Mi
       hostname: postgres
       restartPolicy: Always
-      nodeSelector:
-        cloud.google.com/gke-nodepool: kh-paloma-m01-01-gke-nodes02
 status: {}
 
